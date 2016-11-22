@@ -1,5 +1,7 @@
 {
-    "name": "HeatingController",
-    "dependencies": {
-    }
+  "name": "HeatingController",
+  "dependencies": {
+    "metro-dist": "^3.0.15",
+    "knockout": "^3.4.1"
+  }
 }
