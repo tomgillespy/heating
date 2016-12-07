@@ -1,4 +1,5 @@
-﻿
+﻿var baseurl = 'http://discovery.gillespy.net/heating/index.php/api/';
+
 function AppViewModel() {
     var self = this;
     self.currentTemp = ko.observable(16);
@@ -16,6 +17,15 @@ function AppViewModel() {
         }
     });
     self.targetTemp = ko.observable(18);
+
+
+    window.setInterval(function () {
+        $.getJSON(baseurl + 'boiler_status', {}, function (data) {
+            self.boilerOn(data.status);
+            console.log('Boiler');
+            console.log(data);
+        });
+    }, 5000);
 }
 var vm = new AppViewModel();
 ko.applyBindings(vm);
