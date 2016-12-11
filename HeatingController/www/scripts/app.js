@@ -8,6 +8,7 @@ function AppViewModel() {
     self.nextTarget = ko.observable(17);
     self.targetTemp = ko.observable(18);
     self.targetSince = ko.observable('18:00');
+    self.targetSource = ko.observable('TIMER');
 
     self.heatingiconsrc = ko.computed(function () {
         if (self.boilerOn()) {
@@ -17,15 +18,30 @@ function AppViewModel() {
         }
     });
     self.targetTemp = ko.observable(18);
-
-
-    window.setInterval(function () {
+    self.refreshData = function () {
         $.getJSON(baseurl + 'boiler_status', {}, function (data) {
             self.boilerOn(data.status);
-            console.log('Boiler');
-            console.log(data);
         });
-    }, 5000);
+        $.getJSON(baseurl + 'average_temp', {}, function (data) {
+            self.currentTemp(data.temp.toFixed(1));
+        });
+        $.getJSON(baseurl + 'current_target', {}, function (data) {
+            if (data.status == 1) {
+                self.targetTemp(data.target);
+                self.targetSince(data.time);
+                self.targetSource(data.source);
+            } else {
+                self.targetTemp(0);
+                self.targetSince('00:00');
+                self.targetSource('NONE');
+            }
+        });
+    }
+
+    window.setInterval(function () {
+        self.refreshData();
+    }, 10000);
+    self.refreshData();
 }
 var vm = new AppViewModel();
 ko.applyBindings(vm);
