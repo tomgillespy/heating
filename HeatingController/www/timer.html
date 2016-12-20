@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://discovery.gillespy.net https://themes.googleusercontent.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src * ; connect-src http://discovery.gillespy.net 'self'">
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/metro-dist/js/metro.js"></script>
+    <script src="lib/knockout/dist/knockout.js"></script>
+    <link href="lib/metro-dist/css/metro.css" rel="stylesheet" />
+    <link href="css/stylesheet.css" rel="stylesheet" />
+    <title>HeatingController</title>
+</head>
+<body class="bg-black fg-white">
+    <div class="app-bar">
+        <ul class="app-bar-menu">
+            <li><a href="">Current</a></li>
+            <li>
+                <a href="index.html" class="dropdown-toggle">Heating</a>
+                <ul class="d-menu" data-role="dropdown">
+                    <li><a href="timer.html">Timer</a></li>
+                    <li><a href="">Override</a></li>
+                    <li><a href="">Past</a></li>
+                </ul>
+            </li>
+            <li><a href="">Sensors</a></li>
+            <li><a href="">Power</a></li>
+        </ul>
+    </div>
+    <div class="grid">
+        <div class="row cells3 icon-bar">
+            <div class="cell"><img class="heatingicon" src="images/heating-off.png" data-bind="attr: {src: heatingiconsrc}" /></div>
+            <div class="cell fg-blue"><h2 data-bind="text: nextTime">00:00</h2></div>
+            <div class="cell fg-blue"><h2 data-bind="text: nextTarget() + '&deg;C'"></div>
+        </div>
+        <div class="row cells1">
+            <div class="cell centralcell">
+                <h1 class="maintemp fg-green" data-bind="text: currentTemp()"></h1>
+            </div>
+        </div>
+        <div class="row cells2">
+            <div class="cell calign"><h3><small>Target</small> <span data-bind="text: targetTemp() + '&deg;C'">19&deg;C</span></h3></div>
+            <div class="cell calign"><h3><small>Since</small> <span data-bind="text: targetSince">18:40</span></h3></div>
+        </div>
+        <div class="row cells1">
+            <div class="cell centralcell">
+                <h3 class="fg-red calign" data-bind="text: targetSource()"></h3>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>

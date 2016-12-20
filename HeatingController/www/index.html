@@ -20,11 +20,11 @@
     <body class="bg-black fg-white">
         <div class="app-bar">
             <ul class="app-bar-menu">
-                <li><a href="">Current</a></li>
+                <li><a href="" data-bind="click: function() {changepage('home');}">Current</a></li>
                 <li>
-                    <a href="" class="dropdown-toggle">Heating</a>
+                    <a href="index.html" class="dropdown-toggle">Heating</a>
                     <ul class="d-menu" data-role="dropdown">
-                        <li><a href="">Timer</a></li>
+                        <li><a href="" data-bind="click: function() {changepage('timer');}">Timer</a></li>
                         <li><a href="">Override</a></li>
                         <li><a href="">Past</a></li>
                     </ul>
@@ -33,11 +33,11 @@
                 <li><a href="">Power</a></li>
             </ul>
         </div>
-        <div class="grid">
+        <div class="grid" data-bind="if: (page() == 'home')">
             <div class="row cells3 icon-bar">
                 <div class="cell"><img class="heatingicon" src="images/heating-off.png" data-bind="attr: {src: heatingiconsrc}" /></div>
                 <div class="cell fg-blue"><h2 data-bind="text: nextTime">00:00</h2></div>
-                <div class="cell fg-blue"><h2 data-bind="text: nextTarget() + '&deg;C'"></div>
+                <div class="cell fg-blue"><h2 data-bind="text: nextTarget() + '&deg;C'"></h2></div>
             </div>
             <div class="row cells1">
                 <div class="cell centralcell">
@@ -51,6 +51,31 @@
             <div class="row cells1">
                 <div class="cell centralcell">
                     <h3 class="fg-red calign" data-bind="text: targetSource()"></h3>
+                </div>
+            </div>
+        </div>
+        <div class="grid" data-bind="if: (page() == 'timer')">
+            <div class="row cells1 padding10">
+                <div class="cell"><h1>Timer</h1></div>
+            </div>
+            <div class="row cells1">
+                <div class="cell padding10">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Start</th>
+                                <th>Target</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: timerentries">
+                            <tr>
+                                <td data-bind="text: day"></td>
+                                <td data-bind="text: start"></td>
+                                <td data-bind="text: target"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
