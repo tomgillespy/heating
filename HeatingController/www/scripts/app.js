@@ -46,6 +46,10 @@ function AppViewModel() {
     self.targetTemp = ko.observable(18);
     //Timer
     self.timerentries = ko.observableArray();
+    self.selectedtimer = ko.observable();
+    self.selecttimer = function(s) {
+        self.selectedtimer(s);
+    }
 
 
     self.refreshData = function () {
