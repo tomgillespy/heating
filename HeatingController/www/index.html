@@ -34,7 +34,7 @@
                 <li><a href="">Power</a></li>
             </ul>
         </div>
-        <div class="grid" data-bind="if: (page() == 'home')">
+        <div class="grid" data-bind="if: (currentpage() == 'home')">
             <div class="row cells3 icon-bar">
                 <div class="cell"><img class="heatingicon" src="images/heating-off.png" data-bind="attr: {src: heatingiconsrc}" /></div>
                 <div class="cell fg-blue"><h2 data-bind="text: nextTime">00:00</h2></div>
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid" data-bind="if: (page() == 'timer')">
+        <div class="grid" data-bind="if: (currentpage() == 'timer')">
             <div class="row cells1 padding10">
                 <div class="cell"><h1>Timer</h1></div>
             </div>
@@ -79,6 +79,19 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="grid" data-bind="with: selectedtimer">
+            <div class="row cells1 padding10">
+                <div class="cell"><h1>Edit Timer</h1></div>
+            </div>
+            <div class="row cells1">
+                <div class="cell padding10">
+                    <label>Temperature Target</label>
+                    <div class="input-control text full-size">
+                        <input type="number" placeholder="0" data-bind="textInput: target">
+                    </div>
                 </div>
             </div>
         </div>

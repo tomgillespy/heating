@@ -25,7 +25,9 @@ function AppViewModel() {
     self.page = ko.observable('home');
     self.changepage = function (page) {
         self.page(page);
+        self.selectedtimer(null);
     }
+
 
     //Front Page
     self.currentTemp = ko.observable(16);
@@ -46,8 +48,9 @@ function AppViewModel() {
     self.targetTemp = ko.observable(18);
     //Timer
     self.timerentries = ko.observableArray();
-    self.selectedtimer = ko.observable();
-    self.selecttimer = function(s) {
+    self.selectedtimer = ko.observable(null);
+    self.selecttimer = function (s) {
+        console.log(s);
         self.selectedtimer(s);
     }
 
@@ -87,6 +90,16 @@ function AppViewModel() {
     }, 10000);
     self.refreshData();
     self.setupData();
+
+
+
+    self.currentpage = ko.computed(function () {
+        if (self.selectedtimer() != null) {
+            return false;
+        } //else if () {
+
+        return self.page();
+    });
 }
 var vm = new AppViewModel();
 ko.applyBindings(vm);
